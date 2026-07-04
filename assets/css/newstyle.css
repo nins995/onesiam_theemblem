@@ -101,21 +101,6 @@ h2 {
   background: linear-gradient(180deg, #040505, #040505);
 }
 .section5 {
-  background: linear-gradient(180deg, #040505, #040505);
-}
-.section6 {
-  background: linear-gradient(180deg, #040505, #040505);
-}
-.section7 {
-  background: linear-gradient(180deg, #040505, #040505);
-}
-.section8 {
-  background: linear-gradient(180deg, #040505, #040505);
-}
-.section9 {
-  background: linear-gradient(180deg, #040505, #000000);
-}
-.section10 {
   background: linear-gradient(180deg, #7a7a7d, #000000);
 }
 .section-submitted {
@@ -283,6 +268,12 @@ h2 {
   gap: 8px; /* spacing between box + text */
 }
 
+@media (min-width: 1024px) {
+  .section5 .form-container.right {
+    left: 35%;
+  }
+}
+
 /* === Right-Half Form (Section 3) === */
 .form-container.right {
   position: absolute;
@@ -399,114 +390,6 @@ h2 {
   }
 }
 
-/* === SLIDER STYLES (UPDATED) === */
-.section7 .position-absolute {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  max-width: 1800px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-  padding: 0 40px; /* Add padding to push arrows further from image */
-}
-
-.slider-container {
-  position: relative;
-  width: 35%; /* Changed from 30% to 50% */
-  max-width: 800px; /* Changed from 600px to 800px */
-  overflow: hidden;
-  margin: auto;
-}
-
-.slider {
-  display: flex;
-  transition: transform 0.5s ease;
-  width: 100%;
-}
-
-.slider img {
-  width: 100%;
-  flex-shrink: 0;
-  object-fit: cover;
-}
-
-/* Slider Control Buttons */
-.section7 .position-absolute .prev,
-.section7 .position-absolute .next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  color: white;
-  border: none;
-  padding: 10px 18px;
-  font-size: 28px;
-  cursor: pointer;
-  z-index: 20;
-  transition: opacity 0.3s ease;
-}
-
-.section7 .position-absolute .prev:hover,
-.section7 .position-absolute .next:hover {
-  opacity: 0.7;
-}
-
-.section7 .position-absolute .prev {
-  left: 20px;
-}
-
-.section7 .position-absolute .next {
-  right: 20px;
-}
-
-/* Mobile Responsive - Slider */
-@media only screen and (max-width: 1023px) {
-  .section7 .position-absolute {
-    padding: 0 40px;
-  }
-
-  .slider-container {
-    width: 80%;
-    margin-left: 0vw;
-  }
-
-  .section7 .position-absolute .prev,
-  .section7 .position-absolute .next {
-    font-size: 24px;
-    padding: 8px 12px;
-  }
-
-  .section7 .position-absolute .prev {
-    left: 10px;
-  }
-
-  .section7 .position-absolute .next {
-    right: 10px;
-  }
-
-  .section4 .position-absolute {
-    top: 0%;
-  }
-}
-
-@media only screen and (width: 1024px) and (orientation: portrait) and (hover: none) and (pointer: coarse) {
-  .section7 .position-absolute {
-    padding: 0 60px;
-  }
-
-  .slider-container {
-    width: 60%;
-    margin-left: 0vw;
-  }
-
-  .section4 .position-absolute {
-    top: 0%;
-  }
-}
 
 @media only screen and (width: 768px) and (orientation: portrait) and (hover: none) and (pointer: coarse) {
   .form-container.right .form-image {
@@ -520,28 +403,6 @@ h2 {
   }
 }
 
-@media only screen and (max-width: 767px) {
-  .section7 .position-absolute {
-    padding: 0 30px;
-  }
-
-  .slider-container {
-    width: 100%;
-    margin-left: 0vw;
-  }
-
-  .section7 .position-absolute .prev {
-    left: 5px;
-  }
-
-  .section7 .position-absolute .next {
-    right: 5px;
-  }
-
-  .section4 .position-absolute {
-    top: 7.5%;
-  }
-}
 
 /* Inputs */
 .form-control {
@@ -573,16 +434,9 @@ h2 {
 }
 
 @media only screen and (width: 1024px) and (orientation: portrait) and (hover: none) and (pointer: coarse) {
-  .sec-7 {
-    display: inline;
-  }
   .form-container .form-content {
     width: 100%;
     max-width: 500px;
-  }
-
-  .section4 .position-absolute {
-    top: -4%;
   }
 }
 

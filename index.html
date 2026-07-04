@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PANERAI</title>
+    <title>THE EMBLEM</title>
 
     <!-- Bootstrap 5 -->
     <link
@@ -27,9 +27,10 @@
       class="sticky-icon right"
       alt="Right Icon"
     />
+
+    <!-- Section 1 -->
     <section class="page-section section1">
       <picture>
-        <!-- Mobile image -->
         <source
           media="(max-width: 1023px)"
           srcset="./assets/images/product/product-mobile-1.jpg"
@@ -38,40 +39,18 @@
           media="(width: 1024px) and (orientation: portrait) and (hover: none) and (pointer: coarse)"
           srcset="./assets/images/product/product-mobile-1.jpg"
         />
-
-        <!-- Desktop image -->
         <img
           src="./assets/images/product/product-1.jpg"
           class="section-img"
           alt=""
         />
       </picture>
-      <a href="#section10" class="section-btn"></a>
+      <a href="#section5" class="section-btn"></a>
     </section>
-    <section class="page-section section4">
-      <picture>
-        <!-- Mobile image -->
-        <source
-          media="(max-width: 1023px)"
-          srcset="./assets/images/product/product-mobile-4.jpg?ver=1"
-        />
-        <source
-          media="(width: 1024px) and (orientation: portrait) and (hover: none) and (pointer: coarse)"
-          srcset="./assets/images/product/product-mobile-4.jpg?ver=1"
-        />
-        <!-- Desktop image -->
-        <img
-          src="./assets/images/product/product-4.jpg"
-          class="section-img"
-          alt=""
-        />
-      </picture>
 
-      <a href="#section10" class="section-btn"></a>
-    </section>
-    <section id="section2" class="page-section section2">
+    <!-- Section 2 -->
+    <section class="page-section section2">
       <picture>
-        <!-- Mobile image -->
         <source
           media="(max-width: 1023px)"
           srcset="./assets/images/product/product-mobile-2.jpg"
@@ -80,15 +59,32 @@
           media="(width: 1024px) and (orientation: portrait) and (hover: none) and (pointer: coarse)"
           srcset="./assets/images/product/product-mobile-2.jpg"
         />
-
-        <!-- Desktop image -->
         <img
           src="./assets/images/product/product-2.jpg"
           class="section-img"
           alt=""
         />
       </picture>
-      <!-- Right half div with form -->
+      <a href="#section5" class="section-btn"></a>
+    </section>
+
+    <!-- Section 3 (with form) -->
+    <section class="page-section section3">
+      <picture>
+        <source
+          media="(max-width: 1023px)"
+          srcset="./assets/images/product/product-mobile-3.jpg"
+        />
+        <source
+          media="(width: 1024px) and (orientation: portrait) and (hover: none) and (pointer: coarse)"
+          srcset="./assets/images/product/product-mobile-3.jpg"
+        />
+        <img
+          src="./assets/images/product/product-3.jpg"
+          class="section-img"
+          alt=""
+        />
+      </picture>
       <div class="form-container right">
         <img
           src="./assets/images/product/product-2-text1.png"
@@ -114,7 +110,6 @@
               required
             />
           </div>
-          <!-- Checkbox -->
           <div class="form-check mb-1 mb-lg-3">
             <input
               class="form-check-input"
@@ -128,7 +123,6 @@
               Accept Customer Privacy
             </label>
           </div>
-          <!-- CAPTCHA placeholder -->
           <div class="mb-3 text-white">[CAPTCHA]</div>
           <button type="submit" class="transparent-btn">
             <img src="./assets/images/product/form-button.png" class="w-100" />
@@ -136,48 +130,44 @@
         </form>
       </div>
     </section>
+
+    <!-- Section 4 -->
     <section class="page-section section4">
       <picture>
-        <!-- Mobile image -->
         <source
           media="(max-width: 1023px)"
-          srcset="./assets/images/product/product-mobile-4.jpg?ver=1"
+          srcset="./assets/images/product/product-mobile-4.jpg"
         />
         <source
           media="(width: 1024px) and (orientation: portrait) and (hover: none) and (pointer: coarse)"
-          srcset="./assets/images/product/product-mobile-4.jpg?ver=1"
+          srcset="./assets/images/product/product-mobile-4.jpg"
         />
-        <!-- Desktop image -->
         <img
           src="./assets/images/product/product-4.jpg"
           class="section-img"
           alt=""
         />
       </picture>
-
-      <a href="#section10" class="section-btn"></a>
+      <a href="#section5" class="section-btn"></a>
     </section>
-    <section class="page-section section10" id="section10">
+
+    <!-- Section 5 (with form) -->
+    <section class="page-section section5" id="section5">
       <picture>
-        <!-- Mobile image -->
         <source
           media="(max-width: 1023px)"
-          srcset="./assets/images/product/product-mobile-10.jpg"
+          srcset="./assets/images/product/product-mobile-5.jpg"
         />
-
         <source
           media="(width: 1024px) and (orientation: portrait) and (hover: none) and (pointer: coarse)"
-          srcset="./assets/images/product/product-mobile-10.jpg"
+          srcset="./assets/images/product/product-mobile-5.jpg"
         />
-        <!-- Desktop image -->
         <img
-          src="./assets/images/product/product-10.jpg"
+          src="./assets/images/product/product-5.jpg"
           class="section-img"
           alt=""
         />
       </picture>
-
-      <!-- Left-half div with form -->
       <div class="form-container right">
         <img
           src="./assets/images/product/product-10-text1.png"
@@ -203,21 +193,19 @@
               required
             />
           </div>
-          <!-- Checkbox -->
           <div class="form-check mb-3">
             <input
               class="form-check-input"
               type="checkbox"
               name="check2"
               value=""
-              id="termsCheck7"
+              id="termsCheck5"
               required
             />
-            <label class="form-check-label" for="termsCheck7">
+            <label class="form-check-label" for="termsCheck5">
               Accept Customer Privacy
             </label>
           </div>
-          <!-- CAPTCHA placeholder -->
           <div class="mb-3 text-white">[CAPTCHA]</div>
           <button type="submit" class="transparent-btn">
             <img src="./assets/images/product/form-button.png" class="w-100" />
@@ -230,22 +218,21 @@
         />
       </div>
     </section>
+
+    <!-- Thank you page -->
     <section
       id="section-submitted"
       class="page-section section-submitted d-none"
     >
       <picture>
-        <!-- Mobile image -->
         <source
           media="(max-width: 1023px)"
           srcset="./assets/images/product/product-mobile-11.jpg"
         />
-
         <source
           media="(width: 1024px) and (orientation: portrait) and (hover: none) and (pointer: coarse)"
           srcset="./assets/images/product/product-mobile-11.jpg"
         />
-        <!-- Desktop image -->
         <img
           src="./assets/images/product/product-11.jpg"
           class="section-img"
@@ -253,6 +240,7 @@
         />
       </picture>
     </section>
+
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const links = document.querySelectorAll('a[href^="#"]');
@@ -269,7 +257,6 @@
           });
         });
 
-        // Handle form submissions
         const form1 = document.getElementById("form1");
         const form2 = document.getElementById("form2");
         const sectionSubmitted = document.getElementById("section-submitted");
@@ -277,10 +264,8 @@
         function handleFormSubmit(e) {
           e.preventDefault();
 
-          // Show section 8
           sectionSubmitted.classList.remove("d-none");
 
-          // Scroll to section 8
           setTimeout(() => {
             sectionSubmitted.scrollIntoView({
               behavior: "smooth",
@@ -292,76 +277,6 @@
         form1.addEventListener("submit", handleFormSubmit);
         form2.addEventListener("submit", handleFormSubmit);
       });
-    </script>
-
-    <script>
-      let index = 1;
-      const slider = document.querySelector(".slider");
-      let slides = document.querySelectorAll(".slider img");
-
-      // Clone first & last
-      const firstClone = slides[0].cloneNode(true);
-      const lastClone = slides[slides.length - 1].cloneNode(true);
-
-      slider.appendChild(firstClone);
-      slider.insertBefore(lastClone, slides[0]);
-
-      slides = document.querySelectorAll(".slider img");
-
-      // Set initial slide
-      function updateSlide(animate = true) {
-        const width = slider.clientWidth;
-
-        slider.style.transition = animate ? "transform 0.4s ease" : "none";
-        slider.style.transform = `translateX(${-width * index}px)`;
-      }
-
-      function nextSlide() {
-        if (index >= slides.length - 1) return;
-        index++;
-        updateSlide();
-      }
-
-      function prevSlide() {
-        if (index <= 0) return;
-        index--;
-        updateSlide();
-      }
-
-      slider.addEventListener("transitionend", () => {
-        const realSlidesCount = slides.length - 2;
-
-        // If reached the cloned last slide → jump to real first
-        if (index === slides.length - 1) {
-          index = 1;
-          updateSlide(false);
-        }
-
-        // If reached the cloned first slide → jump to real last
-        if (index === 0) {
-          index = realSlidesCount;
-          updateSlide(false);
-        }
-      });
-
-      // Start position
-      window.onload = () => updateSlide(false);
-
-      // Buttons
-      document.querySelector(".next").onclick = nextSlide;
-      document.querySelector(".prev").onclick = prevSlide;
-
-      // Auto slide
-      let auto = setInterval(nextSlide, 3000);
-
-      document.querySelector(".slider-container").onmouseenter = () =>
-        clearInterval(auto);
-      document.querySelector(".slider-container").onmouseleave = () => {
-        auto = setInterval(nextSlide, 3000);
-      };
-
-      // Resize fix
-      window.onresize = () => updateSlide(false);
     </script>
   </body>
 </html>
