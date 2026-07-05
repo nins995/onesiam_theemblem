@@ -206,16 +206,11 @@ h2 {
   font-size: 18px;
   color: #fff;
   background-color: transparent;
-  /* border: 2px solid red; */
   border-radius: 8px;
   text-decoration: none;
   z-index: 10;
   transition: all 0.3s ease;
 }
-/* .section-btn:hover {
-  box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.5);
-  background-color: rgba(255, 255, 255, 0.05);
-} */
 
 .transparent-btn {
   padding: 0;
@@ -227,7 +222,6 @@ h2 {
 @media (max-width: 1023px) {
   .section-btn {
     width: 58vw;
-    /* max-width: 300px; */
     font-size: 16px;
     text-align: center;
     bottom: calc(50% - 68vw);
@@ -291,17 +285,6 @@ h2 {
   width: 100%;
   margin: auto;
 }
-/* .form-container.left .form-image {
-   width: auto;         
-    max-width: 400px;    
-} */
-
-/* Form remains centered */
-/* .form-container.right .form-content { */
-/* width: 52vh; */
-/* max-width: 400px;   */
-/* margin: 0 auto;       center form content */
-/* } */
 
 /* Form content */
 .form-container .form-content {
@@ -314,24 +297,6 @@ h2 {
 
 .section5 .form-container.left .form-content {
   width: 100%;
-}
-
-/* Submit Button */
-.form-container .btn-submit {
-  width: 100%;
-  padding: 12px 0;
-  font-size: 16px;
-  color: #fff;
-  background-color: transparent;
-  border: 2px solid #fff;
-  transition: all 0.5s ease;
-  border-radius: 0 !important;
-  cursor: pointer;
-}
-.form-container .btn-submit:hover {
-  background-color: #fff;
-  color: #000;
-  border-color: #fff;
 }
 
 /* Checkbox Label Gray */
@@ -386,15 +351,11 @@ h2 {
   z-index: 2;
 }
 
-/* Left-half form (Section 7) */
+/* Left-half form */
 .form-container.left {
   position: absolute;
   top: 50%; /* vertical center */
-  /* left: 25%; */
-  transform: translate(
-    -50%,
-    -50%
-  ); /* horizontal center in left half and vertical center */
+  transform: translate(-50%, -50%); /* center horizontally and vertically */
   width: 50%; /* occupy left half */
   max-width: 400px;
   padding: 20px;
@@ -466,11 +427,9 @@ h2 {
   /* Left form fully centered */
   .form-container.left {
     left: 0;
-    /* bottom: 15vw; */
     transform: unset;
     width: 100%;
     max-width: none;
-    /* margin: auto; */
     padding-left: 10%;
     padding-right: 10%;
     top: unset;
@@ -563,7 +522,6 @@ h2 {
     top: unset;
     left: unset;
     transform: unset;
-    width: 50%;
     width: 130vh;
     max-width: 100%;
     padding: 20px;
@@ -572,25 +530,5 @@ h2 {
     flex-direction: column;
     align-items: start;
     z-index: 2;
-    /* background-color: red; */
-  }
-}
-
-@media (min-width: 1280px) {
-  .form-container.left {
-    position: absolute;
-    top: unset;
-    left: unset;
-    transform: unset;
-    width: 50%;
-    width: 130vh;
-    max-width: 100%;
-    padding: 20px;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    z-index: 2;
-    /* background-color: red; */
   }
 }
