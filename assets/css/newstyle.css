@@ -38,9 +38,9 @@ h2 {
 .sticky-icon.left {
   left: 20px;
   padding-top: 25px;
-  padding-bottom: 25px;
 }
 .sticky-icon.right {
+  padding-top: 10px;
   right: 20px;
 }
 
@@ -58,7 +58,7 @@ h2 {
   }
 }
 
-@media only screen and (width: 1024px) and (orientation: portrait) and (hover: none) and (pointer: coarse) {
+@media only screen and (width: 1024px) and (orientation: portrait) and (pointer: coarse) {
   .sticky-icon {
     top: 10px;
   }
@@ -73,11 +73,11 @@ h2 {
 /* === Per-logo height overrides === */
 /* Desktop */
 .logo-product {
-  height: 100px;
+  height: 105px;
   top: 5px;
 }
 .logo-paragon {
-  height: 70px;
+  height: 90px;
   top: 10px;
 }
 
@@ -92,7 +92,7 @@ h2 {
 }
 
 /* Tablet Portrait */
-@media only screen and (min-width: 744px) and (max-width: 1199px) and (orientation: portrait) and (hover: none) and (pointer: coarse) {
+@media only screen and (min-width: 744px) and (max-width: 1199px) and (orientation: portrait) and (pointer: coarse) {
   .logo-product {
     height: 70px;
   }
@@ -103,7 +103,7 @@ h2 {
 }
 
 /* Tablet Landscape */
-@media only screen and (min-width: 744px) and (max-width: 1199px) and (orientation: landscape) and (hover: none) and (pointer: coarse) {
+@media only screen and (min-width: 744px) and (max-width: 1199px) and (orientation: landscape) and (pointer: coarse) {
   .logo-product {
     height: 90px;
   }
@@ -194,24 +194,6 @@ h2 {
   }
 }
 
-/* iPad Pro portrait 1024px → product-mobile-*.jpg → width drives layout */
-@media only screen and (width: 1024px) and (orientation: portrait) and (hover: none) and (pointer: coarse) {
-  .section-img {
-    width: 100%;
-    height: auto;
-    max-height: none;
-    margin-top: -50px;
-  }
-}
-
-/* iPad landscape → product-*.jpg (desktop) → height drives layout */
-@media only screen and (min-width: 1024px) and (orientation: landscape) and (hover: none) and (pointer: coarse) {
-  .section-img {
-    height: 100%;
-    width: auto;
-  }
-}
-
 /* === Section Buttons === */
 .section-btn {
   position: absolute;
@@ -253,7 +235,7 @@ h2 {
   }
 }
 
-@media only screen and (width: 1024px) and (orientation: portrait) and (hover: none) and (pointer: coarse) {
+@media only screen and (width: 1024px) and (orientation: portrait) and (pointer: coarse) {
   .section-btn {
     width: 56vw;
     font-size: 16px;
@@ -275,13 +257,34 @@ h2 {
   z-index: 2;
 }
 
-/* Section 3 form image */
-.form-container.right .form-image {
-  width: 64vh; /* allow natural width */
-  max-width: unset; /* do not exceed 500px */
-  height: auto; /* maintain aspect ratio */
+/* Section 3 form images — desktop */
+.section3 .form-container.right .form-image {
+  max-width: 100%;
+  height: auto;
   margin-bottom: 25px;
-  display: block; /* block element for proper spacing */
+  display: block;
+}
+.section3 .form-container.right .form-image-1 {
+  width: 49vh;
+  max-width: unset;
+  margin-left: calc((48vh - 49vh) / 2);
+  margin-right: calc((48vh - 49vh) / 2);
+}
+.section3 .form-container.right .form-image-2 { width: 36vh; }
+
+/* Section 5 form images — desktop */
+.section5 .form-container.left .form-image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 25px;
+  display: block;
+}
+.section5 .form-container.left .form-image-1 { width: 36vh; }
+.section5 .form-container.left .form-image-2 {
+  width: 54vh;
+  max-width: unset;
+  margin-left: calc((48vh - 54vh) / 2);
+  margin-right: calc((48vh - 54vh) / 2);
 }
 
 .form-container.left .form-image {
@@ -305,8 +308,12 @@ h2 {
   width: 100%;
 }
 
-.form-container.right .form-content {
-  width: 48vh;
+.section3 .form-container.right .form-content {
+  width: 100%;
+}
+
+.section5 .form-container.left .form-content {
+  width: 100%;
 }
 
 /* Submit Button */
@@ -349,23 +356,28 @@ h2 {
   gap: 8px; /* spacing between box + text */
 }
 
-@media (min-width: 1024px) {
-  .section5 .form-container.right {
-    left: 35%;
-  }
+/* === Section 3 Right-Half Form === */
+.section3 .form-container.right {
+  position: absolute;
+  top: 50%;
+  left: 75%;
+  transform: translate(-50%, -50%);
+  width: 48vh;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
 }
 
-/* === Right-Half Form (Section 3) === */
-.form-container.right {
+/* === Section 5 Left-Half Form === */
+.section5 .form-container.left {
   position: absolute;
-  top: 50%; /* vertical center */
-  left: 75%; /* center of right half */
-  transform: translate(
-    -50%,
-    -50%
-  ); /* horizontal center in right half and vertical center */
-  width: 50%; /* occupy right half */
-  max-width: 400px;
+  top: 50%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+  width: 48vh;
   padding: 20px;
   border-radius: 8px;
   display: flex;
@@ -395,19 +407,11 @@ h2 {
 
 /* === Mobile Responsive for Forms === */
 @media (max-width: 1023px) {
-  .form-container.right .form-image {
-    margin-bottom: 12px;
-  }
-
   .form-container .form-content {
     padding-left: 20px;
     padding-right: 20px;
-    width: 100%; /* Added this line */
-    margin: 0 auto; /* Center the form */
-  }
-
-  .form-container.right .form-content {
-    width: 85% !important; /* Changed from 100% to 80% */
+    width: 100%;
+    margin: 0 auto;
   }
 
   /* Left form fully centered */
@@ -421,8 +425,8 @@ h2 {
     padding-right: 10%;
   }
 
-  /* Right form: horizontally centered, vertical at half of page */
-  .form-container.right {
+  /* Section 3 right form */
+  .section3 .form-container.right {
     left: 50%;
     top: 56.5%;
     transform: translateX(-50%);
@@ -430,14 +434,31 @@ h2 {
     padding: 0 30px;
     max-width: none;
   }
+  .section3 .form-container.right .form-image { margin-bottom: 12px; }
+  .section3 .form-container.right .form-image-1 { width: 100%; max-width: 90%; }
+  .section3 .form-container.right .form-image-2 { width: 100%; max-width: 90%; }
+  .section3 .form-container.right .form-content {
+    width: 85% !important;
+  }
 
-  .form-container.right .form-image {
+  /* Section 5 left form */
+  .section5 .form-container.left {
+    left: 50%;
+    top: 56.5%;
+    transform: translateX(-50%);
     width: 100%;
-    max-width: 90%;
+    padding: 0 30px;
+    max-width: none;
+  }
+  .section5 .form-container.left .form-image { margin-bottom: 12px; }
+  .section5 .form-container.left .form-image-1 { width: 100%; max-width: 90%; }
+  .section5 .form-container.left .form-image-2 { width: 100%; max-width: 90%; }
+  .section5 .form-container.left .form-content {
+    width: 85% !important;
   }
 }
 
-@media only screen and (width: 1024px) and (orientation: portrait) and (hover: none) and (pointer: coarse) {
+@media only screen and (width: 1024px) and (orientation: portrait) and (pointer: coarse) {
   .form-container .form-content {
     padding-left: 30px;
     padding-right: 30px;
@@ -455,30 +476,43 @@ h2 {
     top: unset;
   }
 
-  /* Right form: horizontally centered, vertical at half of page */
-  .form-container.right {
+  /* Section 3 right form */
+  .section3 .form-container.right {
     left: 50%;
-    top: 50%; /* still top 50% */
-    transform: translateX(-50%); /* only horizontal centering */
+    top: 50%;
+    transform: translateX(-50%);
     width: 100%;
     padding: 0 30px;
-    max-width: none;
     max-width: 500px;
   }
-  .form-container.right .form-image {
-    /* display: none; */
+  .section3 .form-container.right .form-image-1 { width: 100%; }
+  .section3 .form-container.right .form-image-2 { width: 100%; }
+
+  /* Section 5 left form */
+  .section5 .form-container.left {
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%);
     width: 100%;
+    padding: 0 30px;
+    max-width: 500px;
   }
+  .section5 .form-container.left .form-image-1 { width: 100%; }
+  .section5 .form-container.left .form-image-2 { width: 100%; }
 }
 
 
-@media only screen and (width: 768px) and (orientation: portrait) and (hover: none) and (pointer: coarse) {
-  .form-container.right .form-image {
+@media only screen and (width: 768px) and (orientation: portrait) and (pointer: coarse) {
+  .section3 .form-container.right .form-image-1,
+  .section3 .form-container.right .form-image-2,
+  .section5 .form-container.left .form-image-1,
+  .section5 .form-container.left .form-image-2 {
     width: 60%;
     max-width: 60%;
   }
 
-  .form-container.right .form-content {
+  .section3 .form-container.right .form-content,
+  .section5 .form-container.left .form-content {
     min-width: 60% !important;
     width: 60% !important;
   }
@@ -487,25 +521,27 @@ h2 {
 
 /* Inputs */
 .form-control {
-  background: #fff !important; /* White background */
-  height: 39px;
-  border: 1px solid #7f7f7f !important;
-  color: #000 !important; /* Changed from #fff to #000 for black text */
+  background: transparent !important;
+  height: 42px;
+  border: 1px solid #fff !important;
+  color: #fff !important;
   border-radius: 0 !important;
 }
 
 /* Placeholder */
 .form-control::placeholder {
-  color: #999 !important; /* Gray placeholder */
-  opacity: 1;
+  color: rgba(255, 255, 255, 0.6) !important;
 }
 
 /* Focus */
 .form-control:focus {
-  background: #fff !important; /* Changed from transparent to white */
-  border-color: #7f7f7f !important; /* Changed from #fff */
+  background: transparent !important;
+  border-color: #fff !important;
+  color: #fff !important;
+}
+
+.form-control:focus {
   box-shadow: none !important;
-  color: #000 !important; /* Black text when typing */
 }
 
 @media (max-width: 1023px) {
@@ -514,7 +550,7 @@ h2 {
   }
 }
 
-@media only screen and (width: 1024px) and (orientation: portrait) and (hover: none) and (pointer: coarse) {
+@media only screen and (width: 1024px) and (orientation: portrait) and (pointer: coarse) {
   .form-container .form-content {
     width: 100%;
     max-width: 500px;
