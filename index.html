@@ -72,16 +72,28 @@
         />
       </picture>
       <div class="form-container right">
-        <img
-          src="./assets/images/product/product-3-text1.png"
-          class="form-image form-image-1 mt-3 mb-1"
-          alt="Image"
-        />
-        <img
-          src="./assets/images/product/product-3-text2.png"
-          class="form-image form-image-2 mt-1 mb-3"
-          alt="Image"
-        />
+        <picture class="form-image form-image-1 mt-3 mb-0 mb-md-1">
+          <source
+            media="(max-width: 1023px)"
+            srcset="./assets/images/product/product-3-mobile-text1.png"
+          />
+          <img
+            src="./assets/images/product/product-3-text1.png"
+            style="width: 100%; height: auto; display: block;"
+            alt="Image"
+          />
+        </picture>
+        <picture class="form-image form-image-2 mt-0 mt-md-1 mb-1 mb-md-3">
+          <source
+            media="(max-width: 1023px)"
+            srcset="./assets/images/product/product-3-mobile-text2.png"
+          />
+          <img
+            src="./assets/images/product/product-3-text2.png"
+            style="width: 100%; height: auto; display: block;"
+            alt="Image"
+          />
+        </picture>
         <form class="form-content" id="form1">
           <div class="mb-2">
             <input
@@ -114,7 +126,7 @@
               Accept Customer Privacy
             </label>
           </div>
-          <div class="mb-3 text-white">[CAPTCHA]</div>
+          <div class="mb-1 mb-md-3 text-white">[CAPTCHA]</div>
           <button type="submit" class="transparent-btn">
             <img src="./assets/images/product/form-button.png" class="w-100" />
           </button>
@@ -196,7 +208,7 @@
         </form>
         <img
           src="./assets/images/product/product-5-text2.png"
-          class="form-image form-image-2 mb-0 mt-3"
+          class="form-image form-image-2 mb-0 mt-1 mt-md-3"
           alt="Image"
         />
       </div>
