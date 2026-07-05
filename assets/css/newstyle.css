@@ -58,7 +58,7 @@ h2 {
   }
 }
 
-@media only screen and (width: 1024px) and (orientation: portrait) and (pointer: coarse) {
+@media only screen and (width: 1024px) and (orientation: portrait) {
   .sticky-icon {
     top: 10px;
   }
@@ -92,7 +92,7 @@ h2 {
 }
 
 /* Tablet Portrait */
-@media only screen and (min-width: 744px) and (max-width: 1199px) and (orientation: portrait) and (pointer: coarse) {
+@media only screen and (min-width: 744px) and (max-width: 1199px) and (orientation: portrait) {
   .logo-product {
     height: 70px;
   }
@@ -100,10 +100,15 @@ h2 {
     top: 15px;
     height: 50px;
   }
+  .section1 .section-img {
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+  }
 }
 
 /* Tablet Landscape */
-@media only screen and (min-width: 744px) and (max-width: 1199px) and (orientation: landscape) and (pointer: coarse) {
+@media only screen and (min-width: 744px) and (max-width: 1199px) and (orientation: landscape) {
   .logo-product {
     height: 90px;
   }
@@ -229,7 +234,7 @@ h2 {
   }
 }
 
-@media only screen and (width: 1024px) and (orientation: portrait) and (pointer: coarse) {
+@media only screen and (width: 1024px) and (orientation: portrait) {
   .section-btn {
     width: 56vw;
     font-size: 16px;
@@ -425,7 +430,7 @@ h2 {
   }
 }
 
-@media only screen and (width: 1024px) and (orientation: portrait) and (pointer: coarse) {
+@media only screen and (width: 1024px) and (orientation: portrait) {
   .form-container .form-content {
     padding-left: 30px;
     padding-right: 30px;
@@ -467,19 +472,23 @@ h2 {
 }
 
 
-@media only screen and (width: 768px) and (orientation: portrait) and (pointer: coarse) {
-  .section3 .form-container.right .form-image-1,
+@media only screen and (width: 768px) and (orientation: portrait) {
   .section3 .form-container.right .form-image-2,
-  .section5 .form-container.left .form-image-1,
   .section5 .form-container.left .form-image-2 {
-    width: 60%;
-    max-width: 60%;
+    width: 50%;
+  }
+
+  .section3 .form-container.right .form-image-1{
+    width: 65%;
+  }
+
+  .section5 .form-container.left .form-image-1 {
+    width: 40%;
   }
 
   .section3 .form-container.right .form-content,
   .section5 .form-container.left .form-content {
-    min-width: 60% !important;
-    width: 60% !important;
+    width: 50% !important;
   }
 }
 
@@ -515,7 +524,7 @@ h2 {
   }
 }
 
-@media only screen and (width: 1024px) and (orientation: portrait) and (pointer: coarse) {
+@media only screen and (width: 1024px) and (orientation: portrait) {
   .form-container .form-content {
     width: 100%;
     max-width: 500px;
