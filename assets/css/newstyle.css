@@ -32,11 +32,8 @@ h2 {
 /* === Sticky Icons === */
 .sticky-icon {
   position: fixed;
-  top: 5px;
   z-index: 1000;
   width: auto;
-  height: 70px;
-  max-height: 12vh;
 }
 .sticky-icon.left {
   left: 20px;
@@ -50,7 +47,6 @@ h2 {
 @media (max-width: 1023px) {
   .sticky-icon {
     top: 10px;
-    height: 40px;
   }
   .sticky-icon.left {
     left: 10px;
@@ -65,13 +61,55 @@ h2 {
 @media only screen and (width: 1024px) and (orientation: portrait) and (hover: none) and (pointer: coarse) {
   .sticky-icon {
     top: 10px;
-    height: 30px;
   }
   .sticky-icon.left {
     left: 10px;
   }
   .sticky-icon.right {
     right: 10px;
+  }
+}
+
+/* === Per-logo height overrides === */
+/* Desktop */
+.logo-product {
+  height: 100px;
+  top: 5px;
+}
+.logo-paragon {
+  height: 70px;
+  top: 10px;
+}
+
+/* Mobile */
+@media (max-width: 743px) {
+  .logo-product {
+    height: 55px;
+  }
+  .logo-paragon {
+    height: 40px;
+  }
+}
+
+/* Tablet Portrait */
+@media only screen and (min-width: 744px) and (max-width: 1199px) and (orientation: portrait) and (hover: none) and (pointer: coarse) {
+  .logo-product {
+    height: 70px;
+  }
+  .logo-paragon {
+    top: 15px;
+    height: 50px;
+  }
+}
+
+/* Tablet Landscape */
+@media only screen and (min-width: 744px) and (max-width: 1199px) and (orientation: landscape) and (hover: none) and (pointer: coarse) {
+  .logo-product {
+    height: 90px;
+  }
+  .logo-paragon {
+    top: 15px;
+    height: 50px;
   }
 }
 
@@ -87,24 +125,57 @@ h2 {
   overflow: hidden;
 }
 
-/* === Section Background Gradients === */
-.section1 {
-  background: linear-gradient(180deg, #0d1322, #000004);
-}
-.section2 {
-  background: linear-gradient(180deg, #000000, #000000);
-}
-.section3 {
-  background: linear-gradient(180deg, #0a0f15, #000000);
-}
-.section4 {
-  background: linear-gradient(180deg, #040505, #040505);
-}
-.section5 {
-  background: linear-gradient(180deg, #7a7a7d, #000000);
-}
-.section-submitted {
-  background: linear-gradient(180deg, #000, #030303);
+/* === Mobile blurred background (fills top/bottom gaps) === */
+.section1 { --bg-mobile: url('../images/product/product-mobile-1.jpg'); }
+.section2 { --bg-mobile: url('../images/product/product-mobile-2.jpg'); }
+.section3 { --bg-mobile: url('../images/product/product-mobile-3.jpg'); }
+.section4 { --bg-mobile: url('../images/product/product-mobile-4.jpg'); }
+.section5 { --bg-mobile: url('../images/product/product-mobile-5.jpg'); }
+.section-submitted { --bg-mobile: url('../images/product/product-mobile-11.jpg'); }
+
+@media (max-width: 1023px) {
+  /* Top strip — stretches top ~3% of the image to fill the gap */
+  .page-section::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    height: calc(22% + 20px);
+    background-image: var(--bg-mobile);
+    background-size: 100% 3333%;
+    background-position: top center;
+    filter: blur(25px) brightness(0.7);
+    z-index: 0;
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  }
+
+  /* Bottom strip — stretches bottom ~3% of the image to fill the gap */
+  .page-section::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: -20px;
+    right: -20px;
+    height: calc(22% + 20px);
+    background-image: var(--bg-mobile);
+    background-size: 100% 3333%;
+    background-position: bottom center;
+    filter: blur(25px) brightness(0.7);
+    z-index: 0;
+    -webkit-mask-image: linear-gradient(to top, black 50%, transparent 100%);
+    mask-image: linear-gradient(to top, black 50%, transparent 100%);
+  }
+
+  .page-section .section-img {
+    position: relative;
+    z-index: 1;
+  }
+
+  .page-section .form-container {
+    z-index: 2;
+  }
 }
 
 /* === Section Images === */
@@ -114,20 +185,30 @@ h2 {
   object-fit: contain;
 }
 
+/* product-mobile-*.jpg → width drives layout */
 @media (max-width: 1023px) {
   .section-img {
-    max-width: 100%;
+    width: 100%;
     height: auto;
     max-height: none;
   }
 }
 
+/* iPad Pro portrait 1024px → product-mobile-*.jpg → width drives layout */
 @media only screen and (width: 1024px) and (orientation: portrait) and (hover: none) and (pointer: coarse) {
   .section-img {
-    max-width: 100%;
+    width: 100%;
     height: auto;
     max-height: none;
     margin-top: -50px;
+  }
+}
+
+/* iPad landscape → product-*.jpg (desktop) → height drives layout */
+@media only screen and (min-width: 1024px) and (orientation: landscape) and (hover: none) and (pointer: coarse) {
+  .section-img {
+    height: 100%;
+    width: auto;
   }
 }
 
