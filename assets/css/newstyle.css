@@ -122,6 +122,7 @@ h2 {
 .page-section {
   position: relative;
   height: 100vh;
+  height: 100dvh;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -186,6 +187,7 @@ h2 {
 /* === Section Images === */
 .section-img {
   height: 100vh;
+  height: 100dvh;
   width: auto;
   object-fit: contain;
 }
