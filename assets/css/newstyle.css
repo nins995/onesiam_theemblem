@@ -73,11 +73,11 @@ h2 {
 /* === Per-logo height overrides === */
 /* Desktop */
 .logo-product {
-  height: 105px;
+  height: 85px;
   top: 3px;
 }
 .logo-paragon {
-  height: 90px;
+  height: 85px;
   top: 6px;
 }
 
@@ -110,7 +110,7 @@ h2 {
 /* Tablet Landscape */
 @media only screen and (min-width: 744px) and (max-width: 1199px) and (orientation: landscape) {
   .logo-product {
-    height: 90px;
+    height: 80px;
   }
   .logo-paragon {
     top: 15px;
