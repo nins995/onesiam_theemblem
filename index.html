@@ -309,12 +309,14 @@
           const totalCount = allSlides.length; // includes 2 clones (start + end)
           let position = 1; // track position; 0 = clone(last), 1..realCount = real slides, realCount+1 = clone(first)
           let autoTimer = null;
+          let isAnimating = false;
           const AUTO_DELAY = 10000;
           let trackWidth = sliderEl.offsetWidth;
 
           function setTransform(pos, animate = true) {
             track.style.transition = animate ? "transform 0.5s ease" : "none";
             track.style.transform = `translateX(${pos * -100}%)`;
+            isAnimating = animate;
           }
 
           function updateDots() {
@@ -326,17 +328,26 @@
             position = pos;
             setTransform(position, animate);
             updateDots();
+            if (animate) {
+              clearTimeout(window.__sliderSafetyTimer);
+              window.__sliderSafetyTimer = setTimeout(() => {
+                isAnimating = false;
+              }, 700); // fallback in case transitionend doesn't fire
+            }
           }
 
           function next() {
+            if (isAnimating) return;
             goTo(position + 1);
           }
           function prev() {
+            if (isAnimating) return;
             goTo(position - 1);
           }
 
           // Seamless jump when landing on a clone
           track.addEventListener("transitionend", () => {
+            isAnimating = false;
             if (position === totalCount - 1) {
               // landed on clone of first slide -> jump to real first slide
               position = 1;
@@ -415,6 +426,15 @@
 
           goTo(1, false); // start on first real slide, no animation
           startAuto();
+
+          document.addEventListener("visibilitychange", () => {
+            if (document.hidden) {
+              stopAuto();
+            } else {
+              isAnimating = false; // reset in case a transition got stuck while hidden
+              startAuto();
+            }
+          });
         }
       });
     </script>

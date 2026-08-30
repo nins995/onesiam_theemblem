@@ -338,7 +338,7 @@ h2 {
 .product-slider {
   position: absolute;
   top: 50%;
-  left: 39%;
+  left: 36%;
   transform: translate(-50%, -50%);
   width: 56vh;
   max-width: 90%;
@@ -415,7 +415,7 @@ h2 {
 .section3 .form-container.right {
   position: absolute;
   top: 50%;
-  left: 75%;
+  left: 67%;
   transform: translate(-50%, -50%);
   width: 48vh;
   padding: 20px;
