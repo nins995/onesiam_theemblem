@@ -71,6 +71,25 @@
           alt=""
         />
       </picture>
+      <div class="product-slider" id="productSlider3">
+        <div class="slider-track">
+          <img
+            src="./assets/images/product/product-3-rosegold.png"
+            class="slide active"
+            alt="Product view 1"
+          />
+          <img
+            src="./assets/images/product/product-3-silver.png"
+            class="slide"
+            alt="Product view 2"
+          />
+        </div>
+        <div class="slider-dots">
+          <button class="dot active" data-index="0" aria-label="Slide 1"></button>
+          <button class="dot" data-index="1" aria-label="Slide 2"></button>
+        </div>
+      </div>
+
       <div class="form-container right">
         <picture class="form-image form-image-1 mt-3 mb-0 mb-md-1">
           <source
@@ -267,6 +286,76 @@
 
         form1.addEventListener("submit", handleFormSubmit);
         form2.addEventListener("submit", handleFormSubmit);
+
+        // --- Product Slider (Section 3) ---
+        const sliderEl = document.getElementById("productSlider3");
+        if (sliderEl) {
+          const slides = sliderEl.querySelectorAll(".slide");
+          const dots = sliderEl.querySelectorAll(".dot");
+          let current = 0;
+          let autoTimer = null;
+          const AUTO_DELAY = 4000;
+
+          function goToSlide(index) {
+            slides[current].classList.remove("active");
+            dots[current].classList.remove("active");
+            current = (index + slides.length) % slides.length;
+            slides[current].classList.add("active");
+            dots[current].classList.add("active");
+          }
+
+          function startAuto() {
+            stopAuto();
+            autoTimer = setInterval(() => goToSlide(current + 1), AUTO_DELAY);
+          }
+          function stopAuto() {
+            if (autoTimer) clearInterval(autoTimer);
+          }
+
+          dots.forEach((dot) => {
+            dot.addEventListener("click", () => {
+              goToSlide(parseInt(dot.dataset.index, 10));
+              startAuto();
+            });
+          });
+
+          // Swipe support (touch + mouse drag)
+          let startX = 0;
+          let isDragging = false;
+
+          sliderEl.addEventListener("touchstart", (e) => {
+            startX = e.touches[0].clientX;
+            stopAuto();
+          }, { passive: true });
+
+          sliderEl.addEventListener("touchend", (e) => {
+            const diff = e.changedTouches[0].clientX - startX;
+            if (Math.abs(diff) > 40) {
+              goToSlide(diff < 0 ? current + 1 : current - 1);
+            }
+            startAuto();
+          });
+
+          sliderEl.addEventListener("mousedown", (e) => {
+            startX = e.clientX;
+            isDragging = true;
+            stopAuto();
+          });
+          sliderEl.addEventListener("mouseup", (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            const diff = e.clientX - startX;
+            if (Math.abs(diff) > 40) {
+              goToSlide(diff < 0 ? current + 1 : current - 1);
+            }
+            startAuto();
+          });
+          sliderEl.addEventListener("mouseleave", () => {
+            isDragging = false;
+          });
+
+          startAuto();
+        }
       });
     </script>
   </body>

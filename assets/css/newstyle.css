@@ -334,6 +334,80 @@ h2 {
   gap: 8px; /* spacing between box + text */
 }
 
+/* === Product Slider (Section 3, left side) === */
+.product-slider {
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  width: 56vh;
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+  cursor: grab;
+  user-select: none;
+}
+.product-slider:active {
+  cursor: grabbing;
+}
+
+.product-slider .slider-track {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.product-slider .slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.product-slider .slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.product-slider .slider-dots {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.product-slider .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.product-slider .dot.active {
+  background: #fff;
+}
+
+@media (max-width: 1023px) {
+  .product-slider {
+    position: relative;
+    top: unset;
+    left: unset;
+    transform: none;
+    width: 70%;
+    margin: 0 auto 20px;
+  }
+}
+
 /* === Section 3 Right-Half Form === */
 .section3 .form-container.right {
   position: absolute;
