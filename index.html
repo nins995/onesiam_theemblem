@@ -75,6 +75,11 @@
         <div class="slider-track">
           <div class="slider-track-inner">
             <img
+              src="./assets/images/product/product-3-silver.png"
+              class="slide clone"
+              alt="Product view (clone)"
+            />
+            <img
               src="./assets/images/product/product-3-rosegold.png"
               class="slide"
               alt="Product view 1"
@@ -83,6 +88,11 @@
               src="./assets/images/product/product-3-silver.png"
               class="slide"
               alt="Product view 2"
+            />
+            <img
+              src="./assets/images/product/product-3-rosegold.png"
+              class="slide clone"
+              alt="Product view (clone)"
             />
           </div>
         </div>
@@ -289,36 +299,62 @@
         form1.addEventListener("submit", handleFormSubmit);
         form2.addEventListener("submit", handleFormSubmit);
 
-        // --- Product Slider (Section 3) — carousel, drag-to-slide ---
+        // --- Product Slider (Section 3) — infinite loop carousel, drag-to-slide ---
         const sliderEl = document.getElementById("productSlider3");
         if (sliderEl) {
           const track = sliderEl.querySelector(".slider-track-inner");
-          const slides = sliderEl.querySelectorAll(".slide");
+          const allSlides = sliderEl.querySelectorAll(".slide");
           const dots = sliderEl.querySelectorAll(".dot");
-          const slideCount = slides.length;
-          let current = 0;
+          const realCount = dots.length; // number of real (non-clone) slides
+          const totalCount = allSlides.length; // includes 2 clones (start + end)
+          let position = 1; // track position; 0 = clone(last), 1..realCount = real slides, realCount+1 = clone(first)
           let autoTimer = null;
-          const AUTO_DELAY = 4000;
+          const AUTO_DELAY = 10000;
           let trackWidth = sliderEl.offsetWidth;
 
-          function setTransform(offsetPercent, animate = true) {
+          function setTransform(pos, animate = true) {
             track.style.transition = animate ? "transform 0.5s ease" : "none";
-            track.style.transform = `translateX(${offsetPercent}%)`;
+            track.style.transform = `translateX(${pos * -100}%)`;
           }
 
           function updateDots() {
-            dots.forEach((d, i) => d.classList.toggle("active", i === current));
+            const realIndex = (position - 1 + realCount) % realCount;
+            dots.forEach((d, i) => d.classList.toggle("active", i === realIndex));
           }
 
-          function goToSlide(index) {
-            current = (index + slideCount) % slideCount;
-            setTransform(current * -100);
+          function goTo(pos, animate = true) {
+            position = pos;
+            setTransform(position, animate);
             updateDots();
+          }
+
+          function next() {
+            goTo(position + 1);
+          }
+          function prev() {
+            goTo(position - 1);
+          }
+
+          // Seamless jump when landing on a clone
+          track.addEventListener("transitionend", () => {
+            if (position === totalCount - 1) {
+              // landed on clone of first slide -> jump to real first slide
+              position = 1;
+              setTransform(position, false);
+            } else if (position === 0) {
+              // landed on clone of last slide -> jump to real last slide
+              position = realCount;
+              setTransform(position, false);
+            }
+          });
+
+          function goToDot(index) {
+            goTo(index + 1);
           }
 
           function startAuto() {
             stopAuto();
-            autoTimer = setInterval(() => goToSlide(current + 1), AUTO_DELAY);
+            autoTimer = setInterval(next, AUTO_DELAY); // always one direction
           }
           function stopAuto() {
             if (autoTimer) clearInterval(autoTimer);
@@ -326,12 +362,12 @@
 
           dots.forEach((dot) => {
             dot.addEventListener("click", () => {
-              goToSlide(parseInt(dot.dataset.index, 10));
+              goToDot(parseInt(dot.dataset.index, 10));
               startAuto();
             });
           });
 
-          // Drag / swipe to slide (touch + mouse), right-to-left carousel motion
+          // Drag / swipe (touch + mouse) — still allows manual back/forth browsing
           let startX = 0;
           let isDragging = false;
           let dragOffsetPercent = 0;
@@ -347,19 +383,20 @@
             if (!isDragging) return;
             const deltaPx = x - startX;
             dragOffsetPercent = (deltaPx / trackWidth) * 100;
-            setTransform(current * -100 + dragOffsetPercent, false);
+            track.style.transition = "none";
+            track.style.transform = `translateX(${position * -100 + dragOffsetPercent}%)`;
           }
 
           function dragEnd() {
             if (!isDragging) return;
             isDragging = false;
-            const threshold = 15; // percent of track width
+            const threshold = 15;
             if (dragOffsetPercent < -threshold) {
-              goToSlide(current + 1);
+              next();
             } else if (dragOffsetPercent > threshold) {
-              goToSlide(current - 1);
+              prev();
             } else {
-              goToSlide(current);
+              goTo(position);
             }
             dragOffsetPercent = 0;
             startAuto();
@@ -376,7 +413,7 @@
           window.addEventListener("mousemove", (e) => dragMove(e.clientX));
           window.addEventListener("mouseup", dragEnd);
 
-          goToSlide(0);
+          goTo(1, false); // start on first real slide, no animation
           startAuto();
         }
       });
