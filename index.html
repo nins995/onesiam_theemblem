@@ -73,16 +73,18 @@
       </picture>
       <div class="product-slider" id="productSlider3">
         <div class="slider-track">
-          <img
-            src="./assets/images/product/product-3-rosegold.png"
-            class="slide active"
-            alt="Product view 1"
-          />
-          <img
-            src="./assets/images/product/product-3-silver.png"
-            class="slide"
-            alt="Product view 2"
-          />
+          <div class="slider-track-inner">
+            <img
+              src="./assets/images/product/product-3-rosegold.png"
+              class="slide"
+              alt="Product view 1"
+            />
+            <img
+              src="./assets/images/product/product-3-silver.png"
+              class="slide"
+              alt="Product view 2"
+            />
+          </div>
         </div>
         <div class="slider-dots">
           <button class="dot active" data-index="0" aria-label="Slide 1"></button>
@@ -287,21 +289,31 @@
         form1.addEventListener("submit", handleFormSubmit);
         form2.addEventListener("submit", handleFormSubmit);
 
-        // --- Product Slider (Section 3) ---
+        // --- Product Slider (Section 3) — carousel, drag-to-slide ---
         const sliderEl = document.getElementById("productSlider3");
         if (sliderEl) {
+          const track = sliderEl.querySelector(".slider-track-inner");
           const slides = sliderEl.querySelectorAll(".slide");
           const dots = sliderEl.querySelectorAll(".dot");
+          const slideCount = slides.length;
           let current = 0;
           let autoTimer = null;
           const AUTO_DELAY = 4000;
+          let trackWidth = sliderEl.offsetWidth;
+
+          function setTransform(offsetPercent, animate = true) {
+            track.style.transition = animate ? "transform 0.5s ease" : "none";
+            track.style.transform = `translateX(${offsetPercent}%)`;
+          }
+
+          function updateDots() {
+            dots.forEach((d, i) => d.classList.toggle("active", i === current));
+          }
 
           function goToSlide(index) {
-            slides[current].classList.remove("active");
-            dots[current].classList.remove("active");
-            current = (index + slides.length) % slides.length;
-            slides[current].classList.add("active");
-            dots[current].classList.add("active");
+            current = (index + slideCount) % slideCount;
+            setTransform(current * -100);
+            updateDots();
           }
 
           function startAuto() {
@@ -319,41 +331,52 @@
             });
           });
 
-          // Swipe support (touch + mouse drag)
+          // Drag / swipe to slide (touch + mouse), right-to-left carousel motion
           let startX = 0;
           let isDragging = false;
+          let dragOffsetPercent = 0;
 
-          sliderEl.addEventListener("touchstart", (e) => {
-            startX = e.touches[0].clientX;
-            stopAuto();
-          }, { passive: true });
-
-          sliderEl.addEventListener("touchend", (e) => {
-            const diff = e.changedTouches[0].clientX - startX;
-            if (Math.abs(diff) > 40) {
-              goToSlide(diff < 0 ? current + 1 : current - 1);
-            }
-            startAuto();
-          });
-
-          sliderEl.addEventListener("mousedown", (e) => {
-            startX = e.clientX;
+          function dragStart(x) {
+            startX = x;
             isDragging = true;
+            trackWidth = sliderEl.offsetWidth;
             stopAuto();
-          });
-          sliderEl.addEventListener("mouseup", (e) => {
+          }
+
+          function dragMove(x) {
+            if (!isDragging) return;
+            const deltaPx = x - startX;
+            dragOffsetPercent = (deltaPx / trackWidth) * 100;
+            setTransform(current * -100 + dragOffsetPercent, false);
+          }
+
+          function dragEnd() {
             if (!isDragging) return;
             isDragging = false;
-            const diff = e.clientX - startX;
-            if (Math.abs(diff) > 40) {
-              goToSlide(diff < 0 ? current + 1 : current - 1);
+            const threshold = 15; // percent of track width
+            if (dragOffsetPercent < -threshold) {
+              goToSlide(current + 1);
+            } else if (dragOffsetPercent > threshold) {
+              goToSlide(current - 1);
+            } else {
+              goToSlide(current);
             }
+            dragOffsetPercent = 0;
             startAuto();
-          });
-          sliderEl.addEventListener("mouseleave", () => {
-            isDragging = false;
-          });
+          }
 
+          sliderEl.addEventListener("touchstart", (e) => dragStart(e.touches[0].clientX), { passive: true });
+          sliderEl.addEventListener("touchmove", (e) => dragMove(e.touches[0].clientX), { passive: true });
+          sliderEl.addEventListener("touchend", dragEnd);
+
+          sliderEl.addEventListener("mousedown", (e) => {
+            e.preventDefault();
+            dragStart(e.clientX);
+          });
+          window.addEventListener("mousemove", (e) => dragMove(e.clientX));
+          window.addEventListener("mouseup", dragEnd);
+
+          goToSlide(0);
           startAuto();
         }
       });

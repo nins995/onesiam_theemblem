@@ -338,7 +338,7 @@ h2 {
 .product-slider {
   position: absolute;
   top: 50%;
-  left: 40%;
+  left: 39%;
   transform: translate(-50%, -50%);
   width: 56vh;
   max-width: 90%;
@@ -357,36 +357,35 @@ h2 {
   position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.product-slider .slider-track-inner {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease;
 }
 
 .product-slider .slide {
-  position: absolute;
-  top: 0;
-  left: 0;
+  flex: 0 0 100%;
   width: 100%;
   height: 100%;
   object-fit: contain;
-  opacity: 0;
-  transition: opacity 0.5s ease;
   pointer-events: none;
-}
-
-.product-slider .slide.active {
-  opacity: 1;
-  pointer-events: auto;
 }
 
 .product-slider .slider-dots {
   display: flex;
-  gap: 10px;
+  gap: 14px;
   margin-top: 20px;
 }
 
 .product-slider .dot {
-  width: 9px;
-  height: 9px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  border: 1px solid #fff;
+  border: 2px solid #fff;
   background: transparent;
   padding: 0;
   cursor: pointer;
@@ -399,12 +398,14 @@ h2 {
 
 @media (max-width: 1023px) {
   .product-slider {
-    position: relative;
-    top: unset;
-    left: unset;
-    transform: none;
-    width: 70%;
-    margin: 0 auto 20px;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 62%;
+  }
+  .section3 .form-container.right {
+    top: 68%;
   }
 }
 
