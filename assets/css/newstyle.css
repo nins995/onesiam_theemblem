@@ -356,34 +356,35 @@ h2 {
 .product-slider .slider-track {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1;
+  height: auto;
   overflow: hidden;
 }
 
 .product-slider .slider-track-inner {
   display: flex;
   width: 100%;
-  height: 100%;
+  align-items: flex-start;
   transition: transform 0.5s ease;
 }
 
 .product-slider .slide {
   flex: 0 0 100%;
   width: 100%;
-  height: 100%;
+  height: auto;
+  display: block;
   object-fit: contain;
   pointer-events: none;
 }
 
 .product-slider .slider-dots {
   display: flex;
-  gap: 14px;
-  margin-top: 20px;
+  gap: 10px;
+  margin-top: 8px;
 }
 
 .product-slider .dot {
-  width: 14px;
-  height: 14px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   border: 2px solid #fff;
   background: transparent;
@@ -399,13 +400,14 @@ h2 {
 @media (max-width: 1023px) {
   .product-slider {
     position: absolute;
-    top: 20%;
+    top: 36%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 62%;
+    width: 70%;
   }
-  .section3 .form-container.right {
-    top: 68%;
+  .product-slider .dot {
+    width: 10px;
+    height: 10px;
   }
 }
 
@@ -477,7 +479,7 @@ h2 {
   /* Section 3 right form */
   .section3 .form-container.right {
     left: 50%;
-    top: 45%;
+    top: 50%;
     transform: translateX(-50%);
     width: 100%;
     padding: 0 30px;
