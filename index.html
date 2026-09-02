@@ -72,46 +72,40 @@
         />
       </picture>
       <div class="product-slider" id="productSlider3">
+        <button class="slider-arrow arrow-left" id="sliderArrowLeft" aria-label="Previous">
+          <img src="./assets/images/product/arrow-left.png" alt="Previous" />
+        </button>
         <div class="slider-track">
           <div class="slider-track-inner">
             <img
               src="./assets/images/product/product-3-silver.png"
-              class="slide clone"
-              alt="Product view (clone)"
-            />
-            <img
-              src="./assets/images/product/product-3-rosegold.png"
               class="slide"
               alt="Product view 1"
             />
             <img
-              src="./assets/images/product/product-3-silver.png"
+              src="./assets/images/product/product-3-rosegold.png"
               class="slide"
               alt="Product view 2"
             />
-            <img
-              src="./assets/images/product/product-3-rosegold.png"
-              class="slide clone"
-              alt="Product view (clone)"
-            />
           </div>
         </div>
-        <div class="slider-dots">
-          <button class="dot active" data-index="0" aria-label="Slide 1"></button>
-          <button class="dot" data-index="1" aria-label="Slide 2"></button>
-        </div>
+        <button class="slider-arrow arrow-right" id="sliderArrowRight" aria-label="Next">
+          <img src="./assets/images/product/arrow-right.png" alt="Next" />
+        </button>
       </div>
 
       <div class="form-container right">
-        <picture class="form-image form-image-1 mt-3 mb-0 mb-md-1">
+        <picture class="form-image form-image-1 mt-3 mb-0 mb-md-1" id="formImage1">
           <source
             media="(max-width: 1023px)"
-            srcset="./assets/images/product/product-3-mobile-text1.png"
+            srcset="./assets/images/product/product-3-mobile-white-gold.png"
+            id="formImage1MobileSource"
           />
           <img
-            src="./assets/images/product/product-3-text1.png"
+            src="./assets/images/product/product-3-text-white-gold.png"
             style="width: 100%; height: auto; display: block;"
             alt="Image"
+            id="formImage1Img"
           />
         </picture>
         <picture class="form-image form-image-2 mt-0 mt-md-1 mb-1 mb-md-3">
@@ -299,86 +293,58 @@
         form1.addEventListener("submit", handleFormSubmit);
         form2.addEventListener("submit", handleFormSubmit);
 
-        // --- Product Slider (Section 3) — infinite loop carousel, drag-to-slide ---
+        // --- Product Slider (Section 3) — arrow controls, swipe-enabled, no auto-advance, no loop ---
         const sliderEl = document.getElementById("productSlider3");
         if (sliderEl) {
           const track = sliderEl.querySelector(".slider-track-inner");
-          const allSlides = sliderEl.querySelectorAll(".slide");
-          const dots = sliderEl.querySelectorAll(".dot");
-          const realCount = dots.length; // number of real (non-clone) slides
-          const totalCount = allSlides.length; // includes 2 clones (start + end)
-          let position = 1; // track position; 0 = clone(last), 1..realCount = real slides, realCount+1 = clone(first)
-          let autoTimer = null;
-          let isAnimating = false;
-          const AUTO_DELAY = 10000;
+          const slides = sliderEl.querySelectorAll(".slide");
+          const slideCount = slides.length;
+          const arrowLeft = document.getElementById("sliderArrowLeft");
+          const arrowRight = document.getElementById("sliderArrowRight");
+          const formImage1Img = document.getElementById("formImage1Img");
+          const formImage1MobileSource = document.getElementById("formImage1MobileSource");
+          let current = 0;
           let trackWidth = sliderEl.offsetWidth;
 
-          function setTransform(pos, animate = true) {
+          const formImages = [
+            {
+              desktop: "./assets/images/product/product-3-text-white-gold.png",
+              mobile: "./assets/images/product/product-3-mobile-white-gold.png",
+            },
+            {
+              desktop: "./assets/images/product/product-3-text-pink-gold.png",
+              mobile: "./assets/images/product/product-3-mobile-pink-gold.png",
+            },
+          ];
+
+          function setTransform(offsetPercent, animate = true) {
             track.style.transition = animate ? "transform 0.5s ease" : "none";
-            track.style.transform = `translateX(${pos * -100}%)`;
-            isAnimating = animate;
+            track.style.transform = `translateX(${offsetPercent}%)`;
           }
 
-          function updateDots() {
-            const realIndex = (position - 1 + realCount) % realCount;
-            dots.forEach((d, i) => d.classList.toggle("active", i === realIndex));
+          function updateArrows() {
+            arrowLeft.style.visibility = current === 0 ? "hidden" : "visible";
+            arrowRight.style.visibility = current === slideCount - 1 ? "hidden" : "visible";
           }
 
-          function goTo(pos, animate = true) {
-            position = pos;
-            setTransform(position, animate);
-            updateDots();
-            if (animate) {
-              clearTimeout(window.__sliderSafetyTimer);
-              window.__sliderSafetyTimer = setTimeout(() => {
-                isAnimating = false;
-              }, 700); // fallback in case transitionend doesn't fire
-            }
+          function updateFormImage() {
+            const data = formImages[current];
+            if (!data) return;
+            formImage1Img.src = data.desktop;
+            formImage1MobileSource.srcset = data.mobile;
           }
 
-          function next() {
-            if (isAnimating) return;
-            goTo(position + 1);
-          }
-          function prev() {
-            if (isAnimating) return;
-            goTo(position - 1);
+          function goToSlide(index, animate = true) {
+            current = Math.max(0, Math.min(slideCount - 1, index));
+            setTransform(current * -100, animate);
+            updateArrows();
+            updateFormImage();
           }
 
-          // Seamless jump when landing on a clone
-          track.addEventListener("transitionend", () => {
-            isAnimating = false;
-            if (position === totalCount - 1) {
-              // landed on clone of first slide -> jump to real first slide
-              position = 1;
-              setTransform(position, false);
-            } else if (position === 0) {
-              // landed on clone of last slide -> jump to real last slide
-              position = realCount;
-              setTransform(position, false);
-            }
-          });
+          arrowLeft.addEventListener("click", () => goToSlide(current - 1));
+          arrowRight.addEventListener("click", () => goToSlide(current + 1));
 
-          function goToDot(index) {
-            goTo(index + 1);
-          }
-
-          function startAuto() {
-            stopAuto();
-            autoTimer = setInterval(next, AUTO_DELAY); // always one direction
-          }
-          function stopAuto() {
-            if (autoTimer) clearInterval(autoTimer);
-          }
-
-          dots.forEach((dot) => {
-            dot.addEventListener("click", () => {
-              goToDot(parseInt(dot.dataset.index, 10));
-              startAuto();
-            });
-          });
-
-          // Drag / swipe (touch + mouse) — still allows manual back/forth browsing
+          // Drag / swipe to slide (touch + mouse)
           let startX = 0;
           let isDragging = false;
           let dragOffsetPercent = 0;
@@ -387,30 +353,27 @@
             startX = x;
             isDragging = true;
             trackWidth = sliderEl.offsetWidth;
-            stopAuto();
           }
 
           function dragMove(x) {
             if (!isDragging) return;
             const deltaPx = x - startX;
             dragOffsetPercent = (deltaPx / trackWidth) * 100;
-            track.style.transition = "none";
-            track.style.transform = `translateX(${position * -100 + dragOffsetPercent}%)`;
+            setTransform(current * -100 + dragOffsetPercent, false);
           }
 
           function dragEnd() {
             if (!isDragging) return;
             isDragging = false;
-            const threshold = 15;
+            const threshold = 15; // percent of track width
             if (dragOffsetPercent < -threshold) {
-              next();
+              goToSlide(current + 1);
             } else if (dragOffsetPercent > threshold) {
-              prev();
+              goToSlide(current - 1);
             } else {
-              goTo(position);
+              goToSlide(current);
             }
             dragOffsetPercent = 0;
-            startAuto();
           }
 
           sliderEl.addEventListener("touchstart", (e) => dragStart(e.touches[0].clientX), { passive: true });
@@ -424,17 +387,7 @@
           window.addEventListener("mousemove", (e) => dragMove(e.clientX));
           window.addEventListener("mouseup", dragEnd);
 
-          goTo(1, false); // start on first real slide, no animation
-          startAuto();
-
-          document.addEventListener("visibilitychange", () => {
-            if (document.hidden) {
-              stopAuto();
-            } else {
-              isAnimating = false; // reset in case a transition got stuck while hidden
-              startAuto();
-            }
-          });
+          goToSlide(0, false);
         }
       });
     </script>

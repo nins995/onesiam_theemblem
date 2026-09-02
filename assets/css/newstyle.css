@@ -338,9 +338,9 @@ h2 {
 .product-slider {
   position: absolute;
   top: 50%;
-  left: 36%;
+  left: 39%;
   transform: translate(-50%, -50%);
-  width: 56vh;
+  width: 72vh;
   max-width: 90%;
   display: flex;
   flex-direction: column;
@@ -376,25 +376,32 @@ h2 {
   pointer-events: none;
 }
 
-.product-slider .slider-dots {
-  display: flex;
-  gap: 10px;
-  margin-top: 8px;
+.product-slider {
+  flex-direction: row;
+  gap: 12px;
 }
 
-.product-slider .dot {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  background: transparent;
+.product-slider .slider-arrow {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
   padding: 0;
   cursor: pointer;
-  transition: background 0.3s ease;
+  z-index: 3;
 }
 
-.product-slider .dot.active {
-  background: #fff;
+.product-slider .slider-arrow img {
+  width: 44px;
+  height: auto;
+  display: block;
+  pointer-events: none;
+}
+
+.product-slider .slider-track {
+  flex: 1 1 auto;
 }
 
 @media (max-width: 1023px) {
@@ -403,11 +410,14 @@ h2 {
     top: 36%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 70%;
+    width: 78%;
+    gap: 6px;
   }
-  .product-slider .dot {
-    width: 10px;
-    height: 10px;
+  .product-slider .slider-arrow img {
+    width: 26px;
+  }
+  .section3 .form-container.right {
+    top: 68%;
   }
 }
 
@@ -415,7 +425,7 @@ h2 {
 .section3 .form-container.right {
   position: absolute;
   top: 50%;
-  left: 67%;
+  left: 75%;
   transform: translate(-50%, -50%);
   width: 48vh;
   padding: 20px;
@@ -479,7 +489,7 @@ h2 {
   /* Section 3 right form */
   .section3 .form-container.right {
     left: 50%;
-    top: 50%;
+    top: 45%;
     transform: translateX(-50%);
     width: 100%;
     padding: 0 30px;
